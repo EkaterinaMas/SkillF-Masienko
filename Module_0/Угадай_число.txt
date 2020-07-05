@@ -1,0 +1,23 @@
+import numpy as np
+number = np.random.randint(1,101) # Загадали число
+print("Компьютер загадал число от 1 до 100.")
+print ("")
+
+
+def game_core_v2(number): # Функция принимает загаданное число и возвращает число попыток
+  predict = 50            # Задаем первую попытку угадывания (делим интервал угадывания наполовину, чтобы быстрей добраться до искомого числа.)
+  count = 1               # Счетчик попыток
+  low = 1
+  high = 100
+  
+  while predict != number:   # Цикл отгадывания
+    count += 1               # Плюсуем попытку
+    if predict > number:
+      high = predict         # Задаем загаданное число верхней границей интервала
+      predict = predict - ((high-low)//2)  # Продолжаем делить полученный интервал наполовину
+    elif predict < number:
+      low = predict    # Задаем загаданное число нижней границей интервала
+      predict = predict + ((high-low)//2)
+  return count
+
+print (f'Вы угадали загаданное число "{number}" за {count} раз(а).')
